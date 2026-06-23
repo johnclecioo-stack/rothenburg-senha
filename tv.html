@@ -3,89 +3,109 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Rothenburg Senha - TV</title>
-
+<title>TV - Rothenburg</title>
 <style>
-
-body{
-background:#111;
-color:white;
-font-family:Arial,sans-serif;
-text-align:center;
-margin:0;
-padding:0;
-}
-
-.logo{
-font-size:60px;
-font-weight:bold;
-color:#ffb300;
-margin-top:40px;
-}
-
-.titulo{
-font-size:35px;
-margin-top:30px;
-}
-
-.senha{
-font-size:220px;
-font-weight:bold;
-color:#ffb300;
-margin-top:40px;
-}
-
-.ultimas{
-margin-top:50px;
-font-size:40px;
-}
-
-.lista{
-display:flex;
-justify-content:center;
-gap:30px;
-margin-top:25px;
-}
-
-.item{
-background:#222;
-padding:20px 40px;
-border-radius:15px;
-font-size:45px;
-}
-
+*{box-sizing:border-box}
+body{margin:0;background:#000;font-family:Arial;color:#111;overflow:hidden}
+.screen{width:100vw;height:56.25vw;max-height:100vh;max-width:177.7vh;margin:auto;background:#fff;position:relative}
+.top{height:14%;background:#050505;border-bottom:8px solid #e30613;text-align:center}
+.logo{color:white;font-size:38px;font-weight:900;padding-top:20px}
+.logo span{color:#e30613}
+.main{display:grid;grid-template-columns:36% 64%;height:76%;padding:45px}
+.left{border-right:4px solid #e30613;padding-right:35px}
+.title{background:#e30613;color:white;font-size:32px;font-weight:900;padding:15px;border-radius:10px;text-align:center}
+.item{display:grid;grid-template-columns:90px 1fr;margin-top:18px;border:2px solid #ddd;border-radius:8px;overflow:hidden}
+.rank{background:#e30613;color:white;font-size:34px;font-weight:900;display:grid;place-items:center}
+.num{font-size:56px;font-weight:900;text-align:center}
+.right{text-align:center}
+.pronto{background:#e30613;color:white;font-size:72px;font-weight:900;padding:10px;border-radius:10px;margin:20px auto;width:70%}
+.label{font-size:34px;font-weight:900;margin-top:25px}
+.atual{font-size:250px;font-weight:900;color:#e30613;line-height:1}
+.footer{height:10%;background:#050505;color:white;border-top:7px solid #e30613;display:flex;align-items:center;justify-content:space-around;font-size:28px;font-weight:bold}
+.flash{animation:flash .6s ease-in-out 3}
+@keyframes flash{50%{transform:scale(1.08)}}
 </style>
-
 </head>
-
 <body>
-
-<div class="logo">
-ROTHENBURG
+<div class="screen">
+<div class="top"><div class="logo">ROTHENBURG <span>EXPRESS</span></div></div>
+<div class="main">
+<div class="left">
+<div class="title">ÚLTIMAS CHAMADAS</div>
+<div id="historico"></div>
+</div>
+<div class="right">
+<div class="pronto">PRONTO</div>
+<div class="label">ÚLTIMA CHAMADA</div>
+<div class="atual" id="senhaAtual">--</div>
+</div>
+</div>
+<div class="footer">
+<div id="data">--/--/----</div>
+<div id="hora">--:--:--</div>
+<div>🔊 SOM ATIVO</div>
+</div>
 </div>
 
-<div class="titulo">
-SENHA ATUAL
-</div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 
-<div class="senha">
-001
-</div>
+const firebaseConfig = {
+apiKey: "AIzaSyAO-sbi-tDBsTv6OYwLHC6TkgfYZ6gQ1yM",
+authDomain: "rothenburg-senha.firebaseapp.com",
+databaseURL: "https://rothenburg-senha-default-rtdb.firebaseio.com",
+projectId: "rothenburg-senha",
+storageBucket: "rothenburg-senha.firebasestorage.app",
+messagingSenderId: "760034845391",
+appId: "1:760034845391:web:0560790d326324505fcdba"
+};
 
-<div class="ultimas">
-Últimas chamadas
-</div>
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+let ultimaChamada = null;
 
-<div class="lista">
+function som(){
+const ctx=new AudioContext();
+const gain=ctx.createGain();
+gain.gain.value=.25;
+gain.connect(ctx.destination);
+[750,980].forEach((f,i)=>{
+const o=ctx.createOscillator();
+o.frequency.value=f;
+o.connect(gain);
+o.start(ctx.currentTime+i*.18);
+o.stop(ctx.currentTime+i*.18+.15);
+});
+}
 
-<div class="item">000</div>
-<div class="item">999</div>
-<div class="item">998</div>
-<div class="item">997</div>
-<div class="item">996</div>
+function render(d){
+document.getElementById("senhaAtual").textContent=d.senhaAtual||"--";
+const hist=d.historico||[];
+document.getElementById("historico").innerHTML="";
+for(let i=0;i<5;i++){
+document.getElementById("historico").innerHTML+=`
+<div class="item">
+<div class="rank">${5-i}º</div>
+<div class="num">${hist[i]||"--"}</div>
+</div>`;
+}
+if(ultimaChamada && d.ultimaChamada!==ultimaChamada){
+som();
+document.getElementById("senhaAtual").classList.remove("flash");
+void document.getElementById("senhaAtual").offsetWidth;
+document.getElementById("senhaAtual").classList.add("flash");
+}
+ultimaChamada=d.ultimaChamada;
+}
 
-</div>
+onValue(ref(db,"painelSenha"),s=>{if(s.exists())render(s.val())});
 
+setInterval(()=>{
+const a=new Date();
+document.getElementById("data").textContent=a.toLocaleDateString("pt-BR");
+document.getElementById("hora").textContent=a.toLocaleTimeString("pt-BR");
+},1000);
+</script>
 </body>
 </html>
