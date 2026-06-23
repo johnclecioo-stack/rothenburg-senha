@@ -44,55 +44,80 @@ body{
     transform:translateX(-50%);
     z-index:100;
 }
+.main{
+    display:grid;
+    grid-template-columns:38% 62%;
+    height:calc(100vh - 205px);
+    padding:70px 65px 0 65px;
+}
+
 .left{
     border-right:4px solid #e30613;
-    padding-left:90px;
-    padding-right:30px;
-    margin-right:45px;
-    transform:scale(1.08);
-    transform-origin:top center;
+    padding-right:45px;
+    padding-left:35px;
 }
-.left{
-    border-right:4px solid #e30613;
-    padding-right:35px;
+
+.right{
+    text-align:center;
+    padding-left:65px;
+    padding-top:20px;
 }
-.title{background:#e30613;color:white;font-size:32px;font-weight:900;padding:15px;border-radius:10px;text-align:center}
+
 .item{
     display:grid;
-    grid-template-columns:100px 1fr;
+    grid-template-columns:90px 1fr;
+    height:70px;
+    margin-top:12px;
+    border:2px solid #ddd;
+    border-radius:8px;
+    overflow:hidden;
     align-items:center;
-    height:85px;
+    background:white;
 }
-.item span:last-child{
+
+.rank{
+    background:#e30613;
+    color:white;
+    font-size:30px;
+    font-weight:900;
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
     height:100%;
-    font-size:32px;
-    font-weight:bold;
 }
-.rank{background:#e30613;color:white;font-size:28px;font-weight:900;display:grid;place-items:center}
-.num{font-size:38px;font-weight:900;text-align:center}
+
+.num{
+    font-size:42px;
+    font-weight:900;
+    color:#333;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:100%;
+}
 .right{text-align:center}
 .pronto{
     background:#e30613;
     color:white;
-    font-size:90px;
+    font-size:78px;
     font-weight:900;
-    padding:20px;
+    padding:15px;
     border-radius:10px;
-    margin:0 auto 20px auto;
-    width:80%;
+    margin:0 auto 25px auto;
+    width:85%;
 }
+
 .label{
-    font-size:50px;
-    margin-top:35px;
+    font-size:44px;
+    font-weight:900;
+    margin-top:15px;
 }
+
 .atual{
-    font-size:380px;
+    font-size:260px;
     font-weight:900;
     color:#e30613;
-    line-height:0.9;
+    line-height:.85;
 }
 .footer{
     height:75px;
@@ -189,7 +214,6 @@ document.getElementById("senhaAtual").classList.add("flash");
 }
 ultimaChamada=d.ultimaChamada;
 }
-
 onValue(ref(db,"painelSenha"),s=>{if(s.exists())render(s.val())});
 
 setInterval(()=>{
