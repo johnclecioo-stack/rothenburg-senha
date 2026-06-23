@@ -28,7 +28,7 @@ body{
     position:relative;
 }
 .top{
-    height:80px;
+    height:110px;
     background:#050505;
     border-bottom:5px solid #e30613;
     display:flex;
@@ -37,11 +37,11 @@ body{
     overflow:visible;
 }
 .logo-img{
-    height:170px;
+    height:260px;
     width:auto;
     object-fit:contain;
     position:relative;
-    top:45px;
+    top:55px;
     z-index:100;
 }
 .main{
@@ -82,19 +82,20 @@ body{
     line-height:.85;
 }
 .footer{
-    height:55px;
-    background:#050505;
-    color:white;
-    border-top:5px solid #e30613;
-    display:flex;
-    align-items:center;
-    justify-content:space-around;
-    font-size:22px;
-    font-weight:bold;
     position:absolute;
     left:0;
     right:0;
-    bottom:0;
+    bottom:15px;
+    height:50px;
+    background:#050505;
+    color:white;
+    border-top:4px solid #e30613;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    font-size:20px;
+    font-weight:bold;
+    z-index:50;
 }
 .flash{animation:flash .6s ease-in-out 3}
 @keyframes flash{50%{transform:scale(1.08)}}
