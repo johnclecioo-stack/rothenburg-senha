@@ -47,8 +47,8 @@ body{
 .main{
     display:grid;
     grid-template-columns:38% 62%;
-    height:560px;
-    padding:55px 40px 0 40px;
+    height:500px;
+    padding:35px 40px 0 40px;
 }
 .left{border-right:4px solid #e30613;padding-right:35px}
 .title{background:#e30613;color:white;font-size:32px;font-weight:900;padding:15px;border-radius:10px;text-align:center}
@@ -64,19 +64,37 @@ body{
 .rank{background:#e30613;color:white;font-size:28px;font-weight:900;display:grid;place-items:center}
 .num{font-size:38px;font-weight:900;text-align:center}
 .right{text-align:center}
-.pronto{background:#e30613;color:white;font-size:54px;font-weight:900;padding:10px;border-radius:10px;margin:20px auto;width:70%}
+.pronto{
+    background:#e30613;
+    color:white;
+    font-size:68px;
+    font-weight:900;
+    padding:10px;
+    border-radius:10px;
+    margin:0 auto 20px auto;
+    width:75%;
+}
 .label{font-size:34px;font-weight:900;margin-top:25px}
-.atual{font-size:145px;font-weight:900;color:#e30613;line-height:1}
+.atual{
+    font-size:190px;
+    font-weight:900;
+    color:#e30613;
+    line-height:.85;
+}
 .footer{
-    height:48px;
+    height:55px;
     background:#050505;
     color:white;
     border-top:5px solid #e30613;
     display:flex;
     align-items:center;
     justify-content:space-around;
-    font-size:20px;
+    font-size:22px;
     font-weight:bold;
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
 }
 .flash{animation:flash .6s ease-in-out 3}
 @keyframes flash{50%{transform:scale(1.08)}}
