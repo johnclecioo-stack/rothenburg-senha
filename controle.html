@@ -90,8 +90,8 @@ window.chamar=function(){
 
     salvar(v);
 
-    document.getElementById("senha").value=
-    String((estado.contador || 0)+1).padStart(2,"0");
+    document.getElementById("senha").value =
+    String((Number(v) || 0)+1).padStart(2,"0");
 }
 window.proxima=function(){
 let p=Number(estado.contador||0)+1;
