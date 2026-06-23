@@ -56,12 +56,17 @@ body{
 .title{background:#e30613;color:white;font-size:32px;font-weight:900;padding:15px;border-radius:10px;text-align:center}
 .item{
     display:grid;
-    grid-template-columns:75px 1fr;
-    height:80px;
-    margin-top:8px;
-    border:2px solid #ddd;
-    border-radius:8px;
-    overflow:hidden;
+    grid-template-columns:100px 1fr;
+    align-items:center;
+    height:85px;
+}
+.item span:last-child{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100%;
+    font-size:32px;
+    font-weight:bold;
 }
 .rank{background:#e30613;color:white;font-size:28px;font-weight:900;display:grid;place-items:center}
 .num{font-size:38px;font-weight:900;text-align:center}
