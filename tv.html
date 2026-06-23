@@ -36,10 +36,10 @@ body{
     position:relative;
 }
 .logo-img{
-    height:600px;
+    height:180px;
     width:auto;
     position:absolute;
-    top:-60px;
+    top:-20px;
     left:50%;
     transform:translateX(-50%);
     z-index:100;
@@ -47,7 +47,7 @@ body{
 .main{
     display:grid;
     grid-template-columns:28% 72%;
-    height:500px;
+    height:620px;
     padding:35px 40px 0 40px;
 }
 .left{border-right:4px solid #e30613;padding-right:35px}
@@ -85,17 +85,17 @@ body{
     line-height:0.9;
 }
 .footer{
-    height:100px;
+    height:45px;
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
     background:#050505;
-    border-top:4px solid #e30613;
     color:white;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 40px;
-    font-size:28px;
-    font-weight:bold;
-    z-index:50;
+    padding:0 25px;
 }
 .flash{animation:flash .6s ease-in-out 3}
 @keyframes flash{50%{transform:scale(1.08)}}
