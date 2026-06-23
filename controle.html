@@ -56,15 +56,18 @@ const refPainel = ref(db,"painelSenha");
 
 let estado={senhaAtual:"--",historico:[],contador:0,ultimaChamada:Date.now()};
 
-onValue(refPainel,s=>{
-if(s.exists())estado=s.val();
-document.getElementById("atual").textContent=estado.senhaAtual||"--";
+onValue(refPainel, s=>{
+    if(s.exists()) estado=s.val();
+
+    document.getElementById("atual").textContent =
+        estado.senhaAtual || "--";
+
+    document.getElementById("ultimasControle").innerHTML =
+        (estado.historico || [])
+        .slice(0,5)
+        .map((s,i)=> `${i+1}º - ${s}`)
+        .join("<br>");
 });
-document.getElementById("ultimasControle").innerHTML =
-    (estado.historico || [])
-    .slice(0,5)
-    .map((s,i)=> `${i+1}º - ${s}`)
-    .join("<br>");
 function salvar(nova){
 let hist=estado.historico||[];
 if(estado.senhaAtual && estado.senhaAtual!=="--") hist.unshift(estado.senhaAtual);
