@@ -116,6 +116,7 @@ body{
     border-radius:16px;
     margin:0 auto 25px auto;
     width:95%;
+    animation: brilho 1s infinite;
 }
 .label{
     font-size:44px;
@@ -158,6 +159,20 @@ body{
     100%{
         opacity:1;
         transform:scale(1);
+    }
+}
+
+@keyframes brilho{
+    0%{
+        box-shadow:0 0 10px #e30613;
+    }
+
+    50%{
+        box-shadow:0 0 40px #ff2d55;
+    }
+
+    100%{
+        box-shadow:0 0 10px #e30613;
     }
 }
 </style>
