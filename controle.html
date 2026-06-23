@@ -68,15 +68,22 @@ ultimaChamada:Date.now()
 }
 
 window.chamar=function(){
-let v=document.getElementById("senha").value.trim();
-if(!v)return alert("Digite a senha.");
-salvar(v);
-document.getElementById("senha").value="";
-}
+    let v=document.getElementById("senha").value.trim();
 
+    if(!v){
+        v=String((estado.contador || 0)+1).padStart(2,"0");
+    }
+
+    salvar(v);
+
+    document.getElementById("senha").value=
+    String((estado.contador || 0)+1).padStart(2,"0");
+}
 window.proxima=function(){
 let p=Number(estado.contador||0)+1;
-salvar(String(p).padStart(2,"0"));
+
+document.getElementById("senha").value=
+String(p).padStart(2,"0");
 }
 
 window.repetir=function(){
