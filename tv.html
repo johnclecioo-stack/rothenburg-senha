@@ -9,8 +9,12 @@
 body{margin:0;background:#000;font-family:Arial;color:#111;overflow:hidden}
 .screen{width:100vw;height:56.25vw;max-height:100vh;max-width:177.7vh;margin:auto;background:#fff;position:relative}
 .top{height:14%;background:#050505;border-bottom:8px solid #e30613;text-align:center}
-.logo{color:white;font-size:38px;font-weight:900;padding-top:20px}
-.logo span{color:#e30613}
+.logo-img{
+height:145px;
+max-width:360px;
+object-fit:contain;
+margin-top:-5px;
+}
 .main{display:grid;grid-template-columns:36% 64%;height:76%;padding:45px}
 .left{border-right:4px solid #e30613;padding-right:35px}
 .title{background:#e30613;color:white;font-size:32px;font-weight:900;padding:15px;border-radius:10px;text-align:center}
@@ -28,7 +32,9 @@ body{margin:0;background:#000;font-family:Arial;color:#111;overflow:hidden}
 </head>
 <body>
 <div class="screen">
-<div class="top"><div class="logo">ROTHENBURG <span>EXPRESS</span></div></div>
+<div class="top">
+  <img class="logo-img" src="logo.png.png" alt="Rothenburg Express">
+</div>
 <div class="main">
 <div class="left">
 <div class="title">ÚLTIMAS CHAMADAS</div>
