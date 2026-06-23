@@ -209,24 +209,19 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 let ultimaChamada = null;
     
-function som(){
-    const ctx = new AudioContext();
+function falarSenha(numero){
+    const fala = new SpeechSynthesisUtterance(
+        "Senha " + numero + ". Pedido pronto para retirada."
+    );
 
-    for(let i=0;i<2;i++){
-        const o = ctx.createOscillator();
-        const g = ctx.createGain();
+    fala.lang = "pt-BR";
+    fala.rate = 0.85;
+    fala.pitch = 1;
+    fala.volume = 1;
 
-        o.frequency.value = 900;
-        g.gain.value = 0.3;
-
-        o.connect(g);
-        g.connect(ctx.destination);
-
-        o.start(ctx.currentTime + i*0.3);
-        o.stop(ctx.currentTime + i*0.3 + 0.15);
-    }
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(fala);
 }
-
 function render(d){
 document.getElementById("senhaAtual").textContent=d.senhaAtual||"--";
 const hist=d.historico||[];
@@ -239,7 +234,8 @@ document.getElementById("historico").innerHTML+=`
 </div>`;
 }
 if(ultimaChamada && d.ultimaChamada!==ultimaChamada){
-som();
+    som();
+    falarSenha(d.senhaAtual);
 document.getElementById("senhaAtual").classList.remove("flash");
 void document.getElementById("senhaAtual").offsetWidth;
 document.getElementById("senhaAtual").classList.add("flash");
